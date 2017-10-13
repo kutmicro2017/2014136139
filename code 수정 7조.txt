@@ -1,21 +1,21 @@
-#define Right_G 1 //¿ìÃø ½ÅÈ£µî
+#define Right_G 1 //ìš°ì¸¡ ì‹ í˜¸ë“±
 #define Right_Y 2
 #define Right_R 3
-#define Up_G 4   //À§Ãø ½ÅÈ£µî
+#define Up_G 4   //ìœ„ì¸¡ ì‹ í˜¸ë“±
 #define Up_Y 5
 #define Up_R 6
-#define Left_G 7  //ÁÂÃø ½ÅÈ£µî
+#define Left_G 7  //ì¢Œì¸¡ ì‹ í˜¸ë“±
 #define Left_Y 8
 #define Left_R 9
-#define Down_G 10 //¾Æ·¡ÂÊ ½ÅÈ£µî
+#define Down_G 10 //ì•„ë˜ìª½ ì‹ í˜¸ë“±
 #define Down_Y 11
 #define Down_R 12
-#define Botton_1 20 //½ºÀ§Ä¡
+#define Botton_1 20 //ìŠ¤ìœ„ì¹˜
 int interval = 30000;
-int BlinkYellow = 5;  //³ë¶õºÒ Á¡¸ê ½Ã°£
-volatile bool state1 = true;  //½ºÀ§Ä¡¸¦ ´©¸£¸é false·Î º¯È¯
+int BlinkYellow = 5;  //ë…¸ë€ë¶ˆ ì ë©¸ ì‹œê°„
+volatile bool state1 = true;  //ìŠ¤ìœ„ì¹˜ë¥¼ ëˆ„ë¥´ë©´ falseë¡œ ë³€í™˜
 
-void setup() {  //¼ÂÆÃ
+void setup() {  //ì…‹íŒ…
   pinMode(Right_G, OUTPUT);
   pinMode(Right_Y, OUTPUT);
   pinMode(Right_R, OUTPUT);
@@ -28,20 +28,20 @@ void setup() {  //¼ÂÆÃ
   pinMode(Down_G, OUTPUT);
   pinMode(Down_Y, OUTPUT);
   pinMode(Down_R, OUTPUT);
-  pinMode(Botton_1, INPUT_PULLUP);  //input°úÀÇ Â÷ÀÌ´Â ÇÁ·Î¼¼¼­ ³»ºÎ¿¡ ÀÖ´Â pull-up ÀúÇ×À» »ç¿ë
-  attachInterrupt(3, Botton, FALLING);  //ÀÎÅÍ·´Æ® ÁöÁ¤ÇÔ¼ö(¾î´ÀÇÉÀ¸·Î ÀÎÅÍ·´Æ® Ã³¸®, È£ÃâÇÔ¼ö ÀÌ¸§, ¸ğµå(½ÅÈ£°¡ high¿¡¼­ low))
+  pinMode(Botton_1, INPUT_PULLUP);  //inputê³¼ì˜ ì°¨ì´ëŠ” í”„ë¡œì„¸ì„œ ë‚´ë¶€ì— ìˆëŠ” pull-up ì €í•­ì„ ì‚¬ìš©
+  attachInterrupt(3, Botton, FALLING);  //ì¸í„°ëŸ½íŠ¸ ì§€ì •í•¨ìˆ˜(ì–´ëŠí•€ìœ¼ë¡œ ì¸í„°ëŸ½íŠ¸ ì²˜ë¦¬, í˜¸ì¶œí•¨ìˆ˜ ì´ë¦„, ëª¨ë“œ(ì‹ í˜¸ê°€ highì—ì„œ low))
 }
 
 void loop() {
-  unsigned long CheckTime = millis(); //Å¸ÀÌ¸Ó ÇÔ¼ö, deley¸¦ ÀÌ¿ëÇÏ¿©µµ millis()´Â Èå¸¥´Ù
-  digitalWrite(Right_G, HIGH);  //Ã³À½ ½ÅÈ£
+  unsigned long CheckTime = millis(); //íƒ€ì´ë¨¸ í•¨ìˆ˜, deleyë¥¼ ì´ìš©í•˜ì—¬ë„ millis()ëŠ” íë¥¸ë‹¤
+  digitalWrite(Right_G, HIGH);  //ì²˜ìŒ ì‹ í˜¸
   digitalWrite(Up_R, HIGH);
   digitalWrite(Left_R, HIGH);
   digitalWrite(Down_R, HIGH);
   
-  delay(interval); //30ÃÊ ´ë±â
+  delay(interval); //30ì´ˆ ëŒ€ê¸°
   digitalWrite(Right_G, LOW);
-  BlinkLED(Right_Y);  //yellow½ÅÈ£ Á¡¸êÇÔ¼ö
+  BlinkLED(Right_Y);  //yellowì‹ í˜¸ ì ë©¸í•¨ìˆ˜
   digitalWrite(Right_R, HIGH); 
   digitalWrite(Up_R, LOW);
   digitalWrite(Up_G, HIGH);
@@ -70,12 +70,12 @@ void loop() {
   digitalWrite(Right_R, LOW);
 }
 
-void Botton() { //ÀÎÅÍ·´Æ® ¹ß»ı½Ã È£Ãâ(½ºÀ§Ä¡¸¦ ´©¸¦ °æ¿ì È£Ãâ)
+void Botton() { //ì¸í„°ëŸ½íŠ¸ ë°œìƒì‹œ í˜¸ì¶œ(ìŠ¤ìœ„ì¹˜ë¥¼ ëˆ„ë¥¼ ê²½ìš° í˜¸ì¶œ)
   if(digitalRead(Up_G) == HIGH)
   state1 = false;
 }
 
-void BlinkLED(const int YellowLED) {  //yellow½ÅÈ£ Á¡¸ê
+void BlinkLED(const int YellowLED) {  //yellowì‹ í˜¸ ì ë©¸
    for(int i =0; i < BlinkYellow; i++) {
     digitalWrite(YellowLED, HIGH);
     delay(500);
@@ -84,20 +84,20 @@ void BlinkLED(const int YellowLED) {  //yellow½ÅÈ£ Á¡¸ê
    }
 }
 
-void SwichLoop(int GRight, int YRight, int RRight, long CheckTime) {
-  while(interval > (millis() - CheckTime)) {  //interval ½Ã°£ µ¿¾È ÁøÇà
-    if(state1 == false) { //À§Ãø ½ÅÈ£µîÀÌ ³ì»öµîÀÏ µ¿¾È¿¡ ½ºÀ§Ä¡¸¦ ´©¸¦ °æ¿ì ÁøÇà
+void SwichLoop(int GLight, int YLight, int RLight, long CheckTime) {
+  while(interval > (millis() - CheckTime)) {  //interval ì‹œê°„ ë™ì•ˆ ì§„í–‰
+    if(state1 == false) { //ìœ„ì¸¡ ì‹ í˜¸ë“±ì´ ë…¹ìƒ‰ë“±ì¼ ë™ì•ˆì— ìŠ¤ìœ„ì¹˜ë¥¼ ëˆ„ë¥¼ ê²½ìš° ì§„í–‰
       delay(3000);
-      digitalWrite(GRight, LOW);
-      BlinkLED(YRight);
-      digitalWrite(RRight, HIGH);
+      digitalWrite(GLight, LOW);
+      BlinkLED(YLight);
+      digitalWrite(RLight, HIGH);
       state1 = true;
     }
     delay(500);
   }
-  if(digitalRead(GRight) == HIGH) { //½ºÀ§Ä¡°¡ ´­¸®Áö ¾Ê¾ÒÀ» °æ¿ì ÁøÇà
-    digitalWrite(GRight, LOW);
-    BlinkLED(YRight);
-    digitalWrite(RRight, HIGH);
+  if(digitalRead(GLight) == HIGH) { //ìŠ¤ìœ„ì¹˜ê°€ ëˆŒë¦¬ì§€ ì•Šì•˜ì„ ê²½ìš° ì§„í–‰
+    digitalWrite(GLight, LOW);
+    BlinkLED(YLight);
+    digitalWrite(RLight, HIGH);
   }
 }
